@@ -7,8 +7,11 @@
 #include <poppler-document.h>
 #include <poppler-page.h>
 #include <poppler-toc.h>
-
 #include <iostream>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 using namespace poppler;
 
@@ -36,6 +39,10 @@ int main(int argc, char* argv[]){
   page *p(doc->create_page(0));
   if(!p)
     throw std::runtime_error("Failed to create pagee");
+
+#ifdef _WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
 
   // Test meta fields:
   std::cout << "TOC title: " << to_string(doc->create_toc()->root()->title()) <<  std::endl;
