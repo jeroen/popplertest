@@ -56,14 +56,15 @@ int main(int argc, char* argv[]){
     std::cout << s << ": " << to_utf8(doc->info_key(s)) << std::endl;
 
   // Test toc
-  std::cout << "Table of Contents:\n"  << std::endl;
+  std::cout << "\nTable of Contents:"  << std::endl;
   print_toc(doc->create_toc()->root());
 
   // Test full text
-  std::cout << "PDF text:\n" << to_utf8(p->text()) <<  std::endl;
+  std::cout << "\nPDF text:\n" << to_utf8(p->text()) <<  std::endl;
 
   // Test text list
-  for (text_box& box: p->text_list())
-      std::cout << "textbox " << to_utf8(box.text()) <<  std::endl;
+  std::cout << "\nText Boxes:\n" << std::endl;
+  for (text_box& i: p->text_list())
+      std::cout << "[" << i.bbox().x() << "x" << i.bbox().y() << "] "  << to_utf8(i.text()) << std::endl;
   return 0;
 }
