@@ -48,17 +48,18 @@ int main(int argc, char* argv[]){
   SetConsoleOutputCP(CP_UTF8);
 #endif
 
-  // Test meta fields:
-  std::cout << "TOC title: " << to_utf8(doc->create_toc()->root()->title()) <<  std::endl;
-
   // Test meta keys
   for (std::string& s: doc->info_keys())
-    std::cout << s << ": " << to_utf8(doc->info_key(s)) << std::endl;
+    std::cout << s << ": " << to_utf8(doc->info_key(s)) << std::endl;  
 
-  // Test toc
-  std::cout << "\nTable of Contents:"  << std::endl;
-  print_toc(doc->create_toc()->root());
-
+  // Test meta fields:
+  toc *mytok = doc->create_toc();
+  if(mytok && mytok->root()){
+    std::cout << "TOC title: " << to_utf8(mytok->root()->title()) <<  std::endl;
+    std::cout << "\nTable of Contents:"  << std::endl;
+    print_toc(mytok->root());
+  }
+  
   // Test full text
   std::cout << "\nPDF text:\n" << to_utf8(p->text()) <<  std::endl;
 
