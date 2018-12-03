@@ -1,4 +1,6 @@
-/* Example of encoding problem with ustrings.
+/* Test text extraction using poppler-cpp frontend.
+ * This prints the TOC and metadata and test from the 1st page.
+ * It also prints all the individual textboxes from the 1st page.
  *
  * Compile using:
  *   g++ -std=c++11 test.cpp $(pkg-config --cflags --libs poppler-cpp)
@@ -59,7 +61,7 @@ int main(int argc, char* argv[]){
     std::cout << "\nTable of Contents:"  << std::endl;
     print_toc(mytok->root());
   }
-  
+
   // Test full text
   std::cout << "\nPDF text:\n" << to_utf8(p->text()) <<  std::endl;
 
